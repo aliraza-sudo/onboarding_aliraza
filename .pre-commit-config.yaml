@@ -1,0 +1,55 @@
+default_install_hook_types: [pre-commit, commit-msg]
+default_stages: [pre-commit]
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+        entry: gitleaks detect --no-git --source . --config .gitleaks.toml --redact
+        pass_filenames: false
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.7
+    hooks:
+      - id: ruff
+        args:
+          - --fix
+      - id: ruff-format
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v4.3.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: []
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.3.1
+    hooks:
+      - id: biome-check
+        entry: "bash -c 'cd frontend && biome check --write .'"
+        pass_filenames: false
+        additional_dependencies:
+          - "@biomejs/biome@2.5.13"
+  - repo: local
+    hooks:
+      - id: check-runner-tests
+        name: Check runner tests
+        entry: python3 -m unittest discover -s scripts -p test_*.py
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: full-project-check
+        name: Builds, migrations, types, tests, lint, format and security
+        entry: bash scripts/check.sh
+        language: system
+        pass_filenames: false
+        always_run: true
+        require_serial: true

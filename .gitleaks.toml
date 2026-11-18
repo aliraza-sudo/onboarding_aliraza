@@ -1,0 +1,18 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Placeholders, lockfile hashes, and build output. Gitignored files are excluded by git itself."
+paths = [
+  '''\.env\.backend\.template$''',
+  '''\.env\.frontend\.template$''',
+  '''\.env\.example\.production$''',
+  '''frontend/pnpm-lock\.yaml$''',
+  '''\.next/''',
+  '''node_modules/''',
+  # --no-git walks the filesystem and has no flag to respect .gitignore, so the
+  # gitignored env files must be excluded here. Git already prevents committing them.
+  '''^\.env$''',
+  '''^\.env\.backend$''',
+  '''^\.env\.frontend$''',
+]

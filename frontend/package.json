@@ -1,0 +1,30 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "sideEffects": false,
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwind-merge": "^3.7.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.13",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.5.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "openapi-typescript-codegen": "^0.31.0",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.3.3"
+  },
+  "scripts": {
+    "preinstall": "npx --yes only-allow pnpm",
+    "openapi:generate": "openapi -i http://api:8000/api/schema -o packages/types/api --name ApiClient"
+  },
+  "packageManager": "pnpm@12.4.1",
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=10.18.3"
+  }
+}
