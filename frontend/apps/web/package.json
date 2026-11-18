@@ -12,7 +12,7 @@
   "dependencies": {
     "@frontend/types": "workspace:^",
     "@frontend/ui": "workspace:^",
-    "@hookform/resolvers": "^5.9.1",
+    "@hookform/resolvers": "^7.0.6",
     "next": "^16.3.5",
     "react-hook-form": "^7.88.0",
     "zod": "^4.6.4"
