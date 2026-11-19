@@ -56,6 +56,18 @@ export function PagesOverview() {
               Delete account
             </Link>
           </li>
+
+          <li>
+            <Link href="/projects" className="text-purple-600 underline">
+              Projects
+            </Link>
+          </li>
+
+          <li>
+            <Link href="/projects/new" className="text-purple-600 underline">
+              New project
+            </Link>
+          </li>
         </ul>
       </li>
 

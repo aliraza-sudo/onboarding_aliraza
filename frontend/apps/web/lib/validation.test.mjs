@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { changePasswordFormSchema, registerFormSchema } from './validation.ts'
+import {
+  changePasswordFormSchema,
+  projectFormSchema,
+  registerFormSchema
+} from './validation.ts'
 
 test('registration and password-change validation survive dependency upgrades', () => {
   const registration = {
@@ -28,6 +32,20 @@ test('registration and password-change validation survive dependency upgrades', 
       passwordNew: 'old-password',
       passwordRetype: 'old-password'
     }).success,
+    false
+  )
+})
+
+test('project form requires a name and a known status', () => {
+  const project = { name: 'Roadmap', status: 'draft' }
+  assert.equal(projectFormSchema.safeParse(project).success, true)
+  assert.equal(projectFormSchema.safeParse({ status: 'draft' }).success, false)
+  assert.equal(
+    projectFormSchema.safeParse({ ...project, name: '' }).success,
+    false
+  )
+  assert.equal(
+    projectFormSchema.safeParse({ ...project, status: 'archived' }).success,
     false
   )
 })

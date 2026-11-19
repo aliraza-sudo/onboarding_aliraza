@@ -43,15 +43,15 @@ def eligible_frontend_package(name, item):
 
 def apply_version_policy(label, packages):
     if label == "Python":
-        # Approved: Kombu 5.6.2's Redis extra requires redis<6.5.
+        # Approved: Celery 5.7.0 pins python-dateutil==2.9.0.post0.
         deferred = [
             item
             for item in packages
-            if item["name"] == "redis" and item["version"] == "6.4.0"
+            if item["name"] == "python-dateutil" and item["version"] == "2.9.0.post0"
         ]
         if deferred:
             print(
-                "INFO: redis 6.4.0 retained: Celery/Kombu requires redis<6.5; security audit enforced"
+                "INFO: python-dateutil 2.9.0.post0 retained: Celery pins it; security audit enforced"
             )
         return [item for item in packages if item not in deferred]
     if label != "Frontend":

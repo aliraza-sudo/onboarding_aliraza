@@ -47,10 +47,20 @@ const changePasswordFormSchema = z
     path: ['passwordRetype']
   })
 
+const projectStatuses = ['draft', 'active', 'completed'] as const
+
+const projectFormSchema = z.object({
+  name: z.string().min(1, 'Name is required').max(255),
+  description: z.string().optional(),
+  status: z.enum(projectStatuses, { error: 'Select a status' })
+})
+
 export {
   changePasswordFormSchema,
   deleteAccountFormSchema,
   loginFormSchema,
   profileFormSchema,
+  projectFormSchema,
+  projectStatuses,
   registerFormSchema
 }

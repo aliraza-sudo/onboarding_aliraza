@@ -98,7 +98,7 @@ check. Full output is saved in the temporary log directory printed at the end;
 `index.txt` maps check names to log files.
 Python advisories and high/critical JavaScript advisories block commits.
 Outdated Python/frontend packages and failed version lookups also block commits.
-The approved exceptions are Redis Python client 6.4.0 (Kombu requires `<6.5`)
+The approved exceptions are python-dateutil 2.9.0.post0 (Celery pins it exactly)
 and frontend releases younger than 24 hours. The version report requires the
 newest eligible release; security audits still check every installed package.
 pnpm 12.4.1 and the 24-hour release policy are shared by local and Docker builds.

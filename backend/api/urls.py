@@ -4,12 +4,15 @@ from django.views.generic import RedirectView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
 
+from projects.api import ProjectViewSet
+
 from .api import UserViewSet
 from .auth_views import get_csrf_token, login_user, logout_user
 from .health import health_check
 
 router = routers.DefaultRouter()
 router.register("users", UserViewSet, basename="api-users")
+router.register("projects", ProjectViewSet, basename="api-projects")
 
 urlpatterns = [
     path("", RedirectView.as_view(url="/admin/", permanent=False)),
